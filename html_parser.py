@@ -26,7 +26,7 @@ class HtmlParser(object):
         next_link = soup.find("a", href=re.compile(r"/archive/\?before_time=\d+"))
         next_full_link = None
         if not next_link is None:
-            next_full_link = urlparse.urljoin(page_url, next_link)
+            next_full_link = urlparse.urljoin(page_url, next_link["href"])
             print "next_full_link=%s"%next_full_link
         
         return next_full_link
