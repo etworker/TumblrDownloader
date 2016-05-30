@@ -29,13 +29,14 @@ class TumblrDownloader(object):
             break;
 
         # Print all
-        print "total %d pages, contains %d url" % (pageCount, self.urls.url_count)
+        print "total %d pages, contains %d url" % (pageCount, self.urls.url_count())
         self.urls.print_all_urls()
 
-        # download all
-        dir = os.getcwd()
-        print dir
-        return 
+        # download all to ./<accountName>/
+        dir = "%s/%s" % (os.getcwd(), accountName)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+
         while self.downloader.has_new_url():
             url = self.urls.get_new_url();            
             if self.downloader.downloadImage(url, dir):
