@@ -1,6 +1,6 @@
 __author__ = 'worker'
 
-import traceback, os
+import traceback, os, sys
 import url_manager, html_downloader, html_parser, html_outputer
 
 class TumblrDownloader(object):
@@ -13,6 +13,8 @@ class TumblrDownloader(object):
     def download(self, accountName):
         next_link = "http://%s.tumblr.com/archive/" % accountName
 
+        print "start download %s in tumblr" % accountName
+        
         # collect all urls
         # each page contains one url link to next page
         pageCount = 0
@@ -26,7 +28,7 @@ class TumblrDownloader(object):
                 self.urls.add_new_urls(new_urls)
 
             # stop here for debug
-            break;
+            # break;
 
         # Print all
         print "total %d pages, contains %d url" % (pageCount, self.urls.url_count())
@@ -37,7 +39,10 @@ class TumblrDownloader(object):
         if not os.path.exists(dir):
             os.makedirs(dir)
 
+        fileCount = 0
+        totlaCount = self.urls.url_count()
         while self.urls.has_new_url():
+            fileCount = fileCount + 1
             url = self.urls.get_new_url();
 
             # replace small image to big image
@@ -45,14 +50,23 @@ class TumblrDownloader(object):
 
             # download image
             if self.downloader.downloadImage(url, dir):
-                print "+ %s" % url
+                print "+ %d/%d OK" % (fileCount, totlaCount)
             else:
-                print "- %s" % url
+                print "- %d/%d Failed, url = %s" % (fileCount, totlaCount, url)
 
         print "finished"
 
+    def print_usage(self):
+        print "Usage:\n"
+        print "%s <accountName>\n" % sys.argv[0]
+        print "e.g.\n"
+        print "%s wanimal1983" % sys.argv[0]
+
 if __name__ == "__main__":
-    # root_url = "http://wanimal1983.org/archives"
     obj_spider = TumblrDownloader()
-    obj_spider.download("wanimal1983")
+
+    if len(sys.argv) <= 1:
+        obj_spider.print_usage()
+    else:
+        obj_spider.download(sys.argv[1])
     
