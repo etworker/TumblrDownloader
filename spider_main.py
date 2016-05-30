@@ -14,7 +14,7 @@ class TumblrDownloader(object):
         next_link = "http://%s.tumblr.com/archive/" % accountName
 
         print "start download %s in tumblr" % accountName
-        
+
         # collect all urls
         # each page contains one url link to next page
         pageCount = 0
@@ -34,8 +34,8 @@ class TumblrDownloader(object):
         print "total %d pages, contains %d url" % (pageCount, self.urls.url_count())
         self.urls.print_all_urls()
 
-        # download all to ./<accountName>/
-        dir = "%s/%s" % (os.getcwd(), accountName)
+        # download all to ./download/<accountName>/
+        dir = "%s/download/%s" % (os.getcwd(), accountName)
         if not os.path.exists(dir):
             os.makedirs(dir)
 
