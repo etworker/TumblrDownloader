@@ -1,2 +1,3 @@
 # TumblrDownloader
-For tumblr resources download
+
+Download resources of one account, e.g. wanimal1983
