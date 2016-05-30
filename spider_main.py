@@ -58,9 +58,9 @@ class TumblrDownloader(object):
 
     def print_usage(self):
         print "Usage:\n"
-        print "%s <accountName>\n" % sys.argv[0]
+        print "python %s <accountName>\n" % sys.argv[0]
         print "e.g.\n"
-        print "%s wanimal1983" % sys.argv[0]
+        print "python %s wanimal1983" % sys.argv[0]
 
 if __name__ == "__main__":
     obj_spider = TumblrDownloader()
