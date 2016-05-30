@@ -1,6 +1,6 @@
 __author__ = 'worker'
 
-import traceback 
+import traceback, os
 import url_manager, html_downloader, html_parser, html_outputer
 
 class TumblrDownloader(object):
@@ -25,9 +25,25 @@ class TumblrDownloader(object):
             if not new_urls is None:
                 self.urls.add_new_urls(new_urls)
 
+            # stop here for debug
+            break;
+
         # Print all
         print "total %d pages, contains %d url" % (pageCount, self.urls.url_count)
         self.urls.print_all_urls()
+
+        # download all
+        dir = os.getcwd()
+        print dir
+        return 
+        while self.downloader.has_new_url():
+            url = self.urls.get_new_url();            
+            if self.downloader.downloadImage(url, dir):
+                print "+ %s" % url
+            else:
+                print "- %s" % url
+
+        print "finished"
 
 if __name__ == "__main__":
     # root_url = "http://wanimal1983.org/archives"
