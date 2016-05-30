@@ -37,8 +37,13 @@ class TumblrDownloader(object):
         if not os.path.exists(dir):
             os.makedirs(dir)
 
-        while self.downloader.has_new_url():
-            url = self.urls.get_new_url();            
+        while self.urls.has_new_url():
+            url = self.urls.get_new_url();
+
+            # replace small image to big image
+            url = url.replace("_250.", "_1280.")
+
+            # download image
             if self.downloader.downloadImage(url, dir):
                 print "+ %s" % url
             else:
