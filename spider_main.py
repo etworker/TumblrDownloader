@@ -1,9 +1,9 @@
 __author__ = 'worker'
 
-import traceback
-from TumblrDownloader import url_manager, html_downloader, html_parser, html_outputer
+import traceback 
+import url_manager, html_downloader, html_parser, html_outputer
 
-class TDMain(object):
+class TumblrDownloader(object):
     def __init__(self):
         self.urls = url_manager.UrlManager()
         self.downloader = html_downloader.HtmlDownloader()
@@ -25,6 +25,7 @@ class TDMain(object):
         self.urls.print_all_urls()
 
 if __name__ == "__main__":
-    # root_url = "http://wanimal1983.org/archive/filter-by/photo"
-    obj_spider = TDMain()
+    # root_url = "http://wanimal1983.org/archives"
+    obj_spider = TumblrDownloader()
     obj_spider.download("wanimal1983")
+    

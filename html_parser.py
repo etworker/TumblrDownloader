@@ -10,7 +10,7 @@ class HtmlParser(object):
         new_urls = set()
 
         # http://67.media.tumblr.com/52d4a44283cce631585ca4ff13ed4fa1/tumblr_o7yqogKV5m1r2xjmjo1_250.jpg
-        links = soup.find_all("div", data-imageurl=re.compile(r"*\.media\.tumblr\.com/*"))
+        links = soup.find_all("div", attrs={"class": "post_thumbnail_container has_imageurl"})
         for link in links:
             try:
                 new_url = link["data-imageurl"]
