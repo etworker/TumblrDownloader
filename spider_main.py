@@ -13,8 +13,12 @@ class TumblrDownloader(object):
     def download(self, accountName):
         next_link = "http://%s.tumblr.com/archive/" % accountName
 
-        # Collect all urls
+        # collect all urls
+        # each page contains one url link to next page
+        pageCount = 0
         while not next_link is None:
+            pageCount = pageCount + 1
+            print "downloading page %d ..." % pageCount
             html_cont = self.downloader.downloadPage(next_link)
             new_urls, next_link = self.parser.parse(next_link, html_cont)
 
@@ -22,6 +26,7 @@ class TumblrDownloader(object):
                 self.urls.add_new_urls(new_urls)
 
         # Print all
+        print "total %d pages, contains %d url" % (pageCount, self.urls.url_count)
         self.urls.print_all_urls()
 
 if __name__ == "__main__":

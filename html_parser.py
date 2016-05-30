@@ -14,7 +14,7 @@ class HtmlParser(object):
         for link in links:
             try:
                 new_url = link["data-imageurl"]
-                print new_url
+                # print new_url
                 new_urls.add(new_url)
             except:
                 continue
@@ -27,7 +27,7 @@ class HtmlParser(object):
         next_full_link = None
         if not next_link is None:
             next_full_link = urlparse.urljoin(page_url, next_link["href"])
-            print "next_full_link=%s"%next_full_link
+            # print "next_full_link=%s"%next_full_link
         
         return next_full_link
 
