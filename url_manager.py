@@ -27,5 +27,5 @@ class UrlManager(object):
         return new_url
 
     def print_all_urls(self):
-        print "url count = %d" % len(self.new_url)
+        print "url count = %d" % len(self.new_urls)
 
